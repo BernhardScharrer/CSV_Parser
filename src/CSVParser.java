@@ -81,6 +81,8 @@ public class CSVParser {
 				
 				System.out.println(parts[0] + "|" + parts[1] + "|" + telephon);
 				
+				if (functions==null) continue;
+				
 				data[count][0] = parts[1];
 				data[count][1] = parts[0];
 				data[count][2] = telephon;
@@ -116,13 +118,27 @@ public class CSVParser {
 	}
 	
 	private Functions getFunctionData(String[] array, int start) {
+		
 		start++;
 		Functions functions = new Functions();
 		
+		
 		for (int n = 0; n< array.length-start;n++) {
+			
+			if (array[n+start].startsWith("\"")) {
+				array[n+start] = array[n+start].substring(1, array[n+start].length());
+			}
+			
+			if (array[n+start].endsWith("\"")) {
+				array[n+start] = array[n+start].substring(0, array[n+start].length()-1);
+			}
+			
 			String function = array[n+start];
 			if (!function.equals("-")) functions.addFunction(function);
+			else return null;
 		}
+		
+		if (functions.getFunctions().size() == 0) return null;
 		
 		return functions;
 	}
