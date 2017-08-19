@@ -14,7 +14,7 @@ public class Saver {
 			
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 			
-			writer.write("# Saved CSV-File");
+			writer.write("# Saved CSV-File\n");
 			
 			for (int n = 0;n<table.getLineCount();n++) {
 				writer.write((String) table.getTable().getValueAt(n, 1) + ",");
